@@ -14,13 +14,19 @@ export async function getUserFromCookies(request) {
       const { accessToken } = request.cookies
       // Decode access token
       const decodedAccessToken = jwt.verify(accessToken, JWT_Signature)
-      console.log('decodedAccessToken', decodedAccessToken)
+      // console.log('decodedAccessToken', decodedAccessToken)
       // Return user from record
       return user.findOne({
         _id: ObjectId(decodedAccessToken?.userId),
       })
     }
-    // Decode refresh token
+
+    if (request?.cookies?.refreshToken) {
+      const { refreshToken } = request.cookies
+      // Decode refresh token
+      const decodedRefreshToken = jwt.verify(refreshToken, JWT_Signature)
+      console.log('decocedRefreshToken', decodedRefreshToken)
+    }
     // Look up session
     // Confirm session is valid
     // If session is valid, refresh token
