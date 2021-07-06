@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" href="./assets/layout.css" /> -->
+    <!-- <link rel="stylesheet" href="./assets/reset.css" /> -->
+    <!-- <link rel="stylesheet" href="./assets/skeletons.css" /> -->
+    <title>Index</title>
+  </head>
+  <body>
+
+
+
+
+    <h3 class="block-title">Register Form</h3>
+    <form id="register-form" class="validation-wrapper">
+      <input type="email" name="email" placeholder="Email" class="validation-input"/>
+      <input type="password" name="password" value="password" class="validation-input"/>
+      <button type="submit">Register</button>
+    </form>
+
+    <br>
+    <br>
+    <br>
+
+
+    <h3 class="block-title">Login Form</h3>
+    <form id="login-form">
+      <input type="email" name="email" placeholder="Email"/>
+      <input type="password" name="password" value="password" />
+      <button type="submit">Login</button>
+    </form>
+
+    <script>
+      ;(() => {
+
+        // Register Form 🚪
+        // Find Form Element
+        const registerForm = document.getElementById("register-form")
+        registerForm.addEventListener("submit", async (e) => {
+          e.preventDefault()
+          try {
+          // Get form values
+            const values = Object.values(registerForm).reduce((obj, field) => {
+            if (field.name) {
+              obj[field.name] = field.value
+            }
+            return obj
+          }, {})
+          // Submit Form
+          const res = await fetch('/api/register', {
+            method: "POST",
+            body: JSON.stringify(values),
+            headers: {"Content-type": "application/json; charset=UTF-8"}
+          })
+          } catch (e) {
+            console.error(e)
+          }
+        })
+
+        // Login Form 🔐
+        // Find Form Element
+        const loginForm = document.getElementById("login-form")
+        loginForm.addEventListener("submit", async (e) => {
+          e.preventDefault()
+          try {
+            // Get Form Values
+            const values = Object.values(loginForm).reduce((obj, field) => {
+            if (field.name) {
+              obj[field.name] = field.value
+            }
+            return obj
+          }, {})
+          // Submit Form
+          const res = await fetch('/api/authorize', {
+            method: "POST",
+            body: JSON.stringify(values),
+            headers: {"Content-type": "application/json; charset=UTF-8"}
+          })
+          } catch (e) {
+            console.error(e)
+          }
+        })
+
+      })()
+    </script>
+
+</div>
+
+  </body>
+</html>

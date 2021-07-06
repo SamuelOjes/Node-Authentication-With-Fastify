@@ -1,0 +1,21 @@
+{
+  "name": "node-auth",
+  "version": "1.0.0",
+  "description": "Node Backend Authentication",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "OJEOMOKHAI SAMUEL",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^9.0.2",
+    "fastify": "^3.15.1",
+    "fastify-cookie": "^5.3.1",
+    "fastify-static": "^4.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.6.6"
+  }
+}
