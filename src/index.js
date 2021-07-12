@@ -19,7 +19,7 @@ const app = fastify()
 
 async function startApp() {
   try {
-    // Fat=stify Cookie for setting Cookies to Header
+    // Fastify Cookie for setting Cookies to Header
     app.register(fastifyCookie, {
       secret: process.env.COOKIE_SIGNATURE,
     })

@@ -1,6 +1,6 @@
 import { randomBytes } from 'crypto'
 
-export async function createSession(userdId, connection) {
+export async function createSession(userId, connection) {
   try {
     // Generate A session Token
     const sessionToken = randomBytes(43).toString('hex')
@@ -10,7 +10,7 @@ export async function createSession(userdId, connection) {
     const { session } = await import('../session/session.js')
     await session.insertOne({
       sessionToken,
-      userdId,
+      userId,
       valid: true,
       userAgent,
       ip,
