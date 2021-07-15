@@ -4,12 +4,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index</title>
+    <title>Authentication</title>
   </head>
   <body>
-
-
-
 
     <h3 class="block-title">Register Form</h3>
     <form id="register-form" class="validation-wrapper">
@@ -19,9 +16,8 @@
     </form>
 
     <br>
+    <hr>
     <br>
-    <br>
-
 
     <h3 class="block-title">Login Form</h3>
     <form id="login-form">
@@ -30,9 +26,24 @@
       <button type="submit">Login</button>
     </form>
 
-    <script>
-      ;(() => {
+    <br>
+    <hr>
+    <br>
 
+    <button onclick="logout()">Logout</button>
+
+    <script>
+      async function logout() {
+        try {
+          const res = await fetch('/api/logout', {
+            method: "POST",
+          })
+        } catch (e) {
+          console.error(e)
+        }
+      }
+
+      ;(() => {
         // Register Form 🚪
         // Find Form Element
         const registerForm = document.getElementById("register-form")

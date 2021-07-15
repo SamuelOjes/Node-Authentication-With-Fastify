@@ -9,6 +9,7 @@ import { connectDB } from './db.js'
 import { registerUser } from './accounts/register.js'
 import { authorizeUser } from './accounts/authorize.js'
 import { logUserIn } from './accounts/logUserIn.js'
+import { logUserOut } from './accounts/logUserOut.js'
 import { getUserFromCookies } from './accounts/user.js'
 
 // ESM Specific module for Dirname
@@ -60,10 +61,21 @@ async function startApp() {
       }
     })
 
+    app.post('/api/logout', {}, async (request, reply) => {
+      try {
+        await logUserOut(request, reply)
+        reply.send({
+          data: "User logged Out"
+        })
+      } catch (e) {
+        console.error(e)
+      }
+    })
+
     app.get('/test', {}, async (request, reply) => {
       try {
         // Verify User Login
-        const user = await getUserFromCookies(request)
+        const user = await getUserFromCookies(request, reply)
         // Return User Email, if it exists, otherwise return unauthorized
         if (user?._id) {
           reply.send({
