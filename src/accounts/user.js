@@ -16,7 +16,6 @@ export async function getUserFromCookies(request, reply) {
       const { accessToken } = request.cookies
       // Decode access token
       const decodedAccessToken = jwt.verify(accessToken, JWT_Signature)
-      // console.log('decodedAccessToken', decodedAccessToken)
       // Return user from record
       return user.findOne({
         _id: ObjectId(decodedAccessToken?.userId),
@@ -48,7 +47,7 @@ export async function getUserFromCookies(request, reply) {
 export async function refreshTokens(sessionToken, userId, reply) {
   try {
     // Create JWT
-    const {accessToken, refreshToken} = await createTokens(
+    const { accessToken, refreshToken } = await createTokens(
       sessionToken,
       userId
     )
@@ -56,8 +55,8 @@ export async function refreshTokens(sessionToken, userId, reply) {
 
     //   Create Expiry Date for Access Token
     const now = new Date()
-    // Get Date 15 days in the future
-    const refreshExpires = now.setDate(now.getDate() + 15)
+    // Get Date 1 days in the future
+    const refreshExpires = now.setDate(now.getDate() + 1)
     reply
       //   name, value, object
       .setCookie('refreshToken', refreshToken, {

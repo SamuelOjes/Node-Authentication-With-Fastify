@@ -8,7 +8,7 @@ const mongoUrl = process.env.MONGO_URL
 const local_mongoUrl = process.env.LOCAL_MONGO_URL
 
 // MongoDb Connection Setup
-export const client = new MongoClient(local_mongoUrl, {
+export const client = new MongoClient(mongoUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })

@@ -1,5 +1,6 @@
 import { createSession } from './sessions.js'
 import { createTokens } from './tokens.js'
+import { refreshTokens } from './user.js'
 
 export async function logUserIn(userId, request, reply) {
   const connectionInformation = {
@@ -8,26 +9,12 @@ export async function logUserIn(userId, request, reply) {
   }
   // Create Session
   const sessionToken = await createSession(userId, connectionInformation)
-  console.log('sessionToken', sessionToken)
+  
   // Create JWT
-  const { accessToken, refreshToken } = await createTokens(sessionToken, userId)
+  // Create Expiry Date for Access Token
   // Set Cookie using JWT
+  // Get Date 1 days in the future
+  // An Abstraction from the refreshToken Function in accounts/user.js
+  await refreshTokens(sessionToken, userId, reply)
 
-  //   Create Expiry Date for Access Token
-  const now = new Date()
-  // Get Date 15 days in the future
-  const refreshExpires = now.setDate(now.getDate() + 15)
-  reply
-    //   name, value, object
-    .setCookie('refreshToken', refreshToken, {
-      path: '/',
-      domain: 'localhost',
-      httpOnly: true,
-      expires: refreshExpires,
-    })
-    .setCookie('accessToken', accessToken, {
-      path: '/',
-      domain: 'localhost',
-      httpOnly: true,
-    })
 }

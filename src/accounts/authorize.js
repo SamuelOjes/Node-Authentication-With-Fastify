@@ -13,7 +13,6 @@ export async function authorizeUser(email, password) {
   const savedPassword = userData.password
   // Compare password with password in database
   const isAuthorized = await compare(password, savedPassword)
-  console.log('isAuthorized', isAuthorized)
   // Return Boolean of if password is correct - Psuedo codes
   return { isAuthorized, userId: userData._id }
 }
